@@ -170,7 +170,7 @@ const BookingForm = () => {
   }, [user, pendingBooking, accessToken, dispatch]);
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-10 bg-white shadow-2xl rounded-2xl mt-16 border border-gray-200">
+    <div id="booking-section" className="max-w-3xl mx-auto px-6 py-10 bg-white shadow-2xl rounded-2xl mt-16 border border-gray-200">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
         Book Your Appointment
       </h2>

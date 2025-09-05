@@ -13,7 +13,7 @@ const GallerySection = () => {
     ];
 
     return (
-        <section className="py-10 bg-[#222222] text-white mt-20">
+        <section className="py-10 bg-[#222222] text-white">
             <div className="text-center mb-8">
                 <h2 className="text-2xl md:text-3xl font-bold">Our Work Gallery</h2>
                 <p className="text-lg mt-2 text-accent">

@@ -6,6 +6,9 @@ import GallerySection from '../components/GallerySection';
 import BookingForm from '../components/BookingForm';
 import Testimonials from '../components/Testimonials';
 import BridalGrooming from '../components/BridalGrooming';
+import MeetOurStylists from '../components/MeetOurStylists';
+import SpecialOffers from '../components/SpecialOffers';
+import BookingBanner from '../components/BookingBanner';
 
 
 const Home = () => {
@@ -13,12 +16,18 @@ const Home = () => {
     <div>
       {/* Carousel section */}
       <Carousel/>
+      {/* BookingBanner */}
+      <BookingBanner/>
       {/* Cards section  */}
       <Cards/>
       {/* why are you choose */}
       <WhyCardsSection/>
       {/* BridalGrooming */}
       <BridalGrooming/>
+      {/* MeetOurStylists */}
+      <MeetOurStylists/>
+      {/* SpecialOffers */}
+      <SpecialOffers/>
       {/* GallerySection */}
       <GallerySection/>
       {/* Book Your Appointment  */}
