@@ -5,6 +5,15 @@ import { RxCross2 } from "react-icons/rx";
 import { IoMenu } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/slices/authSlice";
+import {
+  LayoutDashboard,
+  CalendarDays,
+  CreditCard,
+  Scissors,
+  Clock,
+  Users,
+  LogOut,
+} from "lucide-react";
 
 const AdminDashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,9 +34,7 @@ const AdminDashboard = () => {
   };
 
   const isActive = (path) => {
-    return location.pathname === path 
-    ? "bg-pink-500" 
-    : ""
+    return location.pathname === path ? "bg-pink-600" : "hover:bg-gray-700";
   };
 
   return (
@@ -67,49 +74,75 @@ const AdminDashboard = () => {
       {isOpen && (
         <nav className="md:hidden bg-[#1F2937] text-white space-y-2 py-4 px-6 absolute top-16 left-0 w-full h-full">
           <Link to="/profile">
-          <div className="flex items-center gap-2">
-            {user?.profileImage ? (
-              <img
-                src={
-                  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                }
-                className="w-10 h-10 rounded-full bg-accent"
-              />
-            ) : (
-              <span className="w-10 h-10 flex items-center justify-center bg-gray-300 rounded-full text-lg font-semibold">
-                {initials}
-              </span>
-            )}
-            <p>{user?.firstName || "Admin"}</p>
+            <div className="flex items-center gap-4">
+              {user?.profileImage ? (
+                <img
+                  src={
+                    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                  }
+                  className="w-10 h-10 rounded-full bg-accent"
+                />
+              ) : (
+                <span className="w-10 h-10 flex items-center justify-center bg-gray-300 rounded-full text-lg font-semibold">
+                  {initials}
+                </span>
+              )}
+              <p>{user?.firstName || "Admin"}</p>
             </div>
           </Link>
           <Link
             to="/admin/dashboard/"
             onClick={toggleMenu}
-            className={`block py-2 px-4 rounded hover:bg-gray-700 ${isActive("/admin/dashboard/")}`}
+            className={`block mt-3 py-2 px-4 rounded hover:bg-gray-700 ${isActive(
+              "/admin/dashboard/"
+            )}`}
           >
             Dashboard
           </Link>
           <Link
-            to="/admin/dashboard/orders"
+            to="/admin/dashboard/appointments"
             onClick={toggleMenu}
-            className={`block py-2 px-4 rounded hover:bg-gray-700 ${isActive("/admin/dashboard/orders")}`}
+            className={`block py-2 px-4 rounded hover:bg-gray-700 ${isActive(
+              "/admin/dashboard/appointments"
+            )}`}
           >
-            Orders
+            Appointments
           </Link>
           <Link
             to="/admin/dashboard/payments"
             onClick={toggleMenu}
-            className={`block py-2 px-4 rounded hover:bg-gray-700 ${isActive("/admin/dashboard/payments")}`}
+            className={`block py-2 px-4 rounded hover:bg-gray-700 ${isActive(
+              "/admin/dashboard/payments"
+            )}`}
           >
             Payments
           </Link>
           <Link
             to="/admin/dashboard/services"
             onClick={toggleMenu}
-            className={`block py-2 px-4 rounded hover:bg-gray-700 ${isActive("/admin/dashboard/services")}`}
+            className={`block py-2 px-4 rounded hover:bg-gray-700 ${isActive(
+              "/admin/dashboard/services"
+            )}`}
           >
             Services
+          </Link>
+          <Link
+            to="/admin/dashboard/slots"
+            onClick={toggleMenu}
+            className={`block py-2 px-4 rounded hover:bg-gray-700 ${isActive(
+              "/admin/dashboard/slots"
+            )}`}
+          >
+            Time Slots
+          </Link>
+          <Link
+            to="/admin/dashboard/staff"
+            onClick={toggleMenu}
+            className={`block py-2 px-4 rounded hover:bg-gray-700 ${isActive(
+              "/admin/dashboard/staff"
+            )}`}
+          >
+            Staff
           </Link>
           <button
             onClick={handleLogout}
@@ -125,41 +158,72 @@ const AdminDashboard = () => {
         {/* Sidebar for desktop */}
         <aside className="hidden md:flex md:w-64 text-lg font-semibold flex-col bg-[#1F2937] text-white p-4 space-y-3">
           <Link
-            to={"/admin/dashboard/"}
-            className={`py-2 px-4 rounded hover:bg-pink-600 ${isActive("/admin/dashboard/")}`}
+            to="/admin/dashboard/"
+            className={`flex items-center gap-3 py-2 px-4 rounded-md transition-colors duration-200 ${isActive(
+              "/admin/dashboard/"
+            )}`}
           >
+            <LayoutDashboard size={20} />
             Dashboard
           </Link>
           <Link
-            to={"/admin/dashboard/orders"}
-            className={`py-2 px-4 rounded hover:bg-pink-600 ${isActive("/admin/dashboard/orders")}`}
+            to="/admin/dashboard/appointments"
+            className={`flex items-center gap-3 py-2 px-4 rounded-md transition-colors duration-200 ${isActive(
+              "/admin/dashboard/appointments"
+            )}`}
           >
+            <CalendarDays size={20} />
             Appointments
           </Link>
+
           <Link
-            to={"/admin/dashboard/payments"}
-            className={`py-2 px-4 rounded hover:bg-pink-600 ${isActive("/admin/dashboard/payments")}`}
+            to="/admin/dashboard/payments"
+            className={`flex items-center gap-3 py-2 px-4 rounded-md transition-colors duration-200 ${isActive(
+              "/admin/dashboard/payments"
+            )}`}
           >
+            <CreditCard size={20} />
             Payments
           </Link>
+
           <Link
-            to={"/admin/dashboard/services"}
-            className={`py-2 px-4 rounded hover:bg-pink-600 ${isActive("/admin/dashboard/services")}`}
+            to="/admin/dashboard/services"
+            className={`flex items-center gap-3 py-2 px-4 rounded-md transition-colors duration-200 ${isActive(
+              "/admin/dashboard/services"
+            )}`}
           >
+            <Scissors size={20} />
             Services
           </Link>
+
           <Link
-            to={"/admin/dashboard/slots"}
-            className={`py-2 px-4 rounded hover:bg-pink-600 ${isActive("/admin/dashboard/slots")}`}
+            to="/admin/dashboard/slots"
+            className={`flex items-center gap-3 py-2 px-4 rounded-md transition-colors duration-200 ${isActive(
+              "/admin/dashboard/slots"
+            )}`}
           >
-           Time Slots
+            <Clock size={20} />
+            Time Slots
           </Link>
+
           <Link
-            to={"/admin/dashboard/staff"}
-            className={`py-2 px-4 rounded hover:bg-pink-600 ${isActive("/admin/dashboard/staff")}`}
+            to="/admin/dashboard/staff"
+            className={`flex items-center gap-3 py-2 px-4 rounded-md transition-colors duration-200 ${isActive(
+              "/admin/dashboard/staff"
+            )}`}
           >
+            <Users size={20} />
             Staff
           </Link>
+
+          {/* Logout button */}
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 py-2 px-4 rounded-md mt-4 bg-pink-600 hover:bg-pink-700 transition-colors duration-200"
+          >
+            <LogOut size={20} />
+            Logout
+          </button>
         </aside>
 
         {/* Content Area */}

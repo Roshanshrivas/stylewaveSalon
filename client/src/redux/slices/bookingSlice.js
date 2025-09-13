@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   pendingBooking: null, // store booking before login
+  bookings: [],
+  loading: false,
 };
 
 const bookingSlice = createSlice({
@@ -15,8 +17,14 @@ const bookingSlice = createSlice({
     clearPendingBooking: (state) => {
       state.pendingBooking = null;
     },
+    setBookings: (state, action) => {
+      state.bookings = action.payload;
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    }
   },
 });
 
-export const { setPendingBooking, clearPendingBooking } = bookingSlice.actions;
+export const { setPendingBooking, clearPendingBooking, setBookings, setLoading } = bookingSlice.actions;
 export default bookingSlice.reducer;

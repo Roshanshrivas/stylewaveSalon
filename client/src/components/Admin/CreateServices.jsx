@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux"; 
 import { addService, setLoading } from "../../redux/slices/servicesSlice";
 
 const CreateServices = () => {
   const accessToken = useSelector((state) => state.auth.accessToken);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [serviceName, setServiceName] = useState("");
   const [gender, setGender] = useState("");
@@ -65,6 +67,7 @@ const CreateServices = () => {
         if(response?.data?.success){
             toast.success("Service Created Successfully");
             dispatch(addService(response.data.data));
+            navigate("/admin/dashboard/services")
             // Reset form
             setServiceName("");
             setGender("");

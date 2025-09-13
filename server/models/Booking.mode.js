@@ -12,6 +12,11 @@ const bookingSchema = new mongoose.Schema(
       ref: "Service",
       required: true,
     },
+    subServiceId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "SubService",
+      required: true,
+    },
     timeSlotId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "TimeSlot",
@@ -22,9 +27,11 @@ const bookingSchema = new mongoose.Schema(
       ref: "Staff",
       required: true,
     },
+
+    // Booking status
     status: {
       type: String,
-      enum: ["booked", "cancelled", "completed"],
+      enum: ["booked", "cancelled", "completed", "Approved", "Rejected"],
       default: "booked",
     },
     paymentStatus: {
@@ -37,6 +44,24 @@ const bookingSchema = new mongoose.Schema(
       enum: ["online", "cod"], // cod = cash on delivery
       default: "cod",
       required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+
+    // Razorpay details (only for online payments)
+    razorpayOrderId: {
+      type: String,
+      default: null,
+    },
+    razorpayPaymentId: {
+      type: String,
+      default: null,
+    },
+    razorpaySignature: {
+      type: String,
+      default: null,
     },
   },
   { timestamps: true }

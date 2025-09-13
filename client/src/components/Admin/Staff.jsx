@@ -21,6 +21,7 @@ const Staff = () => {
         }
       );
       if (res?.data?.success) {
+        toast.dismiss();
         setStaffs(res.data.data);
         toast.success("Staff Fetched");
       }
@@ -51,6 +52,7 @@ const Staff = () => {
       );
 
       if (res?.data?.success) {
+        toast.dismiss();
         toast.success("🗑️ Staff deleted");
         fetchStaff();
       }

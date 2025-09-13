@@ -27,9 +27,11 @@ const AdminServices = () => {
       );
       if (res?.data?.success) {
         setServices(res.data.data);
+        toast.dismiss();
         toast.success("Successfully");
       }
     } catch (error) {
+      toast.dismiss();
       toast.error("❌ Failed to fetch services");
     } finally {
       setLoading(false);
@@ -55,6 +57,7 @@ const AdminServices = () => {
       );
       
       if (res?.data?.success) {
+        toast.dismiss();
         toast.success("🗑️ Service deleted");
         fetchServices(); // Refresh list
         dispatch(deleteService(id));

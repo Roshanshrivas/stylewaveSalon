@@ -9,7 +9,6 @@ import ContactUs from "./pages/ContactUs";
 import TopOffers from "./components/TopOffers";
 import AdminDashboard from "./pages/AdminDashboard";
 import Dashboard from "./components/Admin/Dashboard";
-import Orders from "./components/Admin/Orders";
 import Payments from "./components/Admin/Payments";
 import AdminServices from "./components/Admin/AdminServices";
 import Profile from "./pages/Profile";
@@ -29,6 +28,8 @@ import Staff from "./components/Admin/Staff";
 import EditStaff from "./components/Admin/EditStaff";
 import CreateStaff from "./components/Admin/CreateStaff";
 import BookingForm from "./components/BookingForm";
+import MyBookings from "./components/MyBookings";
+import Appointments from "./components/Admin/Appointments";
 
 
 const MainLayout = () => (
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
         )
       },
       {
+        path: "/my-bookings",
+        element: <MyBookings />,
+      },
+      {
         path: "/login",
         element: <Login />,
       },
@@ -96,8 +101,8 @@ const router = createBrowserRouter([
         element: <Dashboard/>
       },
       {
-        path: "orders",
-        element: <Orders/>
+        path: "appointments",
+        element: <Appointments/>
       },
       {
         path: "payments",

@@ -186,3 +186,27 @@ export const getSingleSlots = async (req, res) => {
     });
   }
 };
+
+
+//getAvailableSlots
+export const getAvailableSlots = async (req, res) => {
+  try {
+    const { date } = req.query; // frontend sends ?date=2025-09-14
+
+    if (!date) {
+      return res.status(400).json({ success: false, message: "Date is required" });
+    }
+
+    // ✅ Only fetch slots for that date
+    const slots = await TimeSlot.find({ date: date });
+
+    res.status(200).json({
+      success: true,
+      message: "Slots fetched successfully",
+      data: slots,
+    });
+  } catch (error) {
+    console.error("Error fetching slots:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};

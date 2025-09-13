@@ -52,7 +52,7 @@ const Login = () => {
         
         // Navigate to home/dashboard
         if(data.user.role === "admin"){
-            navigate("/admin/dashboard");
+            navigate("/admin/dashboard/");
         } else{
          if (pendingBooking) {
            navigate("/booking"); // redirect back
@@ -72,7 +72,7 @@ const Login = () => {
   useEffect(() => {
   if (user) {
     if(user.role === "admin"){
-      navigate("/admin/dashboard");
+      navigate("/admin/dashboard/");
     } else if (pendingBooking){
       navigate("/booking");
     }

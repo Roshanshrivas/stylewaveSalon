@@ -1,35 +1,39 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const Payments = () => {
-  const [payments] = useState([
-    {
-      id: 1,
-      customer: "Aarav Sharma",
-      service: "Haircut",
-      amount: 200,
-      method: "UPI",
-      date: "2025-08-10",
-      status: "Paid",
-    },
-    {
-      id: 2,
-      customer: "Priya Verma",
-      service: "Facial Treatment",
-      amount: 500,
-      method: "Card",
-      date: "2025-08-11",
-      status: "Pending",
-    },
-    {
-      id: 3,
-      customer: "Rahul Mehta",
-      service: "Pedicure",
-      amount: 350,
-      method: "Cash",
-      date: "2025-08-12",
-      status: "Paid",
-    },
-  ]);
+  const accessToken = useSelector((state) => state.auth.accessToken);
+  const [payments, setPayments] = useState([]);
+
+  //Fetch All Bookings
+  const fetchAllBookings = async () => {
+    try {
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/booking/getall`,
+           { 
+             headers: { Authorization: `Bearer ${accessToken}` },
+             withCredentials: true
+           }
+        );
+
+        console.log("Payment", res?.data?.data);
+
+        if(res?.data?.success){
+          toast.dismiss();
+          toast.success(res?.data?.message, {id: "fetchBookings"});
+          setPayments(res?.data?.data);
+         }
+    } catch (error) {
+        console.error("Error Fetching Bookings:", error.message);
+        toast.error("Failed to fetch Bookings!!");
+    }
+  }
+
+  useEffect(() => {
+      fetchAllBookings();
+  }, [])
+  
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
@@ -50,18 +54,24 @@ const Payments = () => {
           </thead>
           <tbody>
             {payments.map((payment) => (
-              <tr key={payment.id} className="border-b">
-                <td className="p-2 border">{payment.customer}</td>
-                <td className="p-2 border">{payment.service}</td>
-                <td className="p-2 border">{payment.amount}</td>
-                <td className="p-2 border">{payment.method}</td>
-                <td className="p-2 border">{payment.date}</td>
+              <tr key={payment._id} className="border-b">
+                <td className="p-2 border">{payment?.userId?.firstName && payment?.userId?.lastName ? `${payment.userId.firstName} ${payment.userId.lastName}` : "N/A"}</td>
+                <td className="p-2 border">{payment?.serviceId?.serviceName}</td>
+                <td className="p-2 border">₹ {payment?.price}</td>
+                <td className="p-2 border">{payment?.paymentMethod}</td>
+                <td className="p-2 border">
+                  {new Date(payment?.timeSlotId?.date).toLocaleDateString("en-IN", {
+                    day: "2-digit",
+                    month:"short",
+                    year:"numeric",
+                  })}
+                </td>
                 <td
                   className={`p-2 border font-semibold ${
-                    payment.status === "Paid" ? "text-green-600" : "text-yellow-600"
+                    payment?.paymentStatus === "paid" ? "text-green-600" : "text-yellow-600"
                   }`}
                 >
-                  {payment.status}
+                  {payment?.paymentStatus}
                 </td>
               </tr>
             ))}

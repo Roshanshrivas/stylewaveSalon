@@ -26,6 +26,7 @@ const Slots = () => {
 
       if (res?.data?.success) {
         setSlots(res.data.data);
+        toast.dismiss();
         toast.success("Slots Successfully");
       }
     } catch (error) {
@@ -56,6 +57,7 @@ const Slots = () => {
       });
 
       if(res?.data?.success) {
+        toast.dismiss();
         toast.success("🗑️ Slot deleted");
         fetchSlots();
       }
